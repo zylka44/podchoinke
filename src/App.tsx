@@ -1,9 +1,20 @@
-import React from 'react';
+import { useState } from "react";
+import Home from "./components/Home/Home";
+import Signin from "./components/Signin/Signin";
+import Register from "./components/Register/Register";
 
 const App = () => {
+  const [route, setRoute] = useState<string>('home');
+
   return (
-    <div className="App">
-      podchoinke
+    <div>
+      {route === 'home' ? (
+          <Home />
+        ) : route === 'signin' ? (
+          <Signin />
+        ) : (
+          <Register />
+        )}
     </div>
   );
 }
