@@ -1,16 +1,22 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { SigninProps } from "../../models";
 
+interface SigninFormValues {
+  email: string;
+  password: string;
+};
+
 const Signin = ({onRouteChange, loadeUser}: SigninProps) => {
-  const [signInEmail, setSignInEmail] = useState<string>('');
-  const [signInPassword, setSignInPassword] = useState<string>('');
+  const [values, setValues] = useState<SigninFormValues>({
+    email: '',
+    password: '',
+  });
 
-  const onEmailChange = (event: any) => {
-    setSignInEmail(event.target.value)
-  };
-
-  const onPasswordChange = (event: any) => {
-    setSignInPassword(event.target.value)
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValues(prevValues => ({
+        ...prevValues,
+        [e.target.name]: e.target.value
+    }))
   };
 
   const onSubmitSignIn = () => {
@@ -18,8 +24,8 @@ const Signin = ({onRouteChange, loadeUser}: SigninProps) => {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: signInEmail,
-        password: signInPassword,
+        email: values.email,
+        password: values.password,
       }),
     })
       .then((response) => response.json())
@@ -42,9 +48,10 @@ const Signin = ({onRouteChange, loadeUser}: SigninProps) => {
             <input
               className="pa2 input-reset ba bg-transparent hover-bg-dark-green hover-white w-100"
               type="email"
-              name="email-address"
-              id="email-address"
-              onChange={onEmailChange}
+              name="email"
+              value={values.email}
+              id="email"
+              onChange={handleChange}
             />
           </div>
           <div className="mv3">
@@ -55,8 +62,9 @@ const Signin = ({onRouteChange, loadeUser}: SigninProps) => {
               className="b pa2 input-reset ba bg-transparent hover-bg-dark-green hover-white w-100"
               type="password"
               name="password"
+              value={values.password}
               id="password"
-              onChange={onPasswordChange}
+              onChange={handleChange}
             />
           </div>
         </fieldset>

@@ -1,31 +1,34 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { RegisterProps } from "../../models";
 
+interface RegisterFormValues {
+  name: string;
+  email: string;
+  password: string;
+};
+
 const Register = ({onRouteChange, loadeUser}: RegisterProps) => {
-  const [ name, setName ] = useState<string>('');
-  const [ email, setEmail ] = useState<string>('');
-  const [ password, setPassword ] = useState<string>('');
+  const [values, setValues] = useState<RegisterFormValues>({
+    name: '',
+    email: '',
+    password: '',
+  });
 
-  const onNameChange = (event: any) => {
-    setName(event?.target?.value);
-  };
-
-  const onEmailChange = (event: any) => {
-    setEmail(event.target.value);
-  };
-
-  const onPasswordChange = (event: any) => {
-    setPassword(event.target.value);
-  };
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValues(prevValues => ({
+        ...prevValues,
+        [e.target.name]: e.target.value
+    }))
+  }
 
   const onRegister = () => {
     fetch('https://radiant-plateau-91423.herokuapp.com/register', {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
+        name: values.name,
+        email: values.email,
+        password: values.password,
       }),
     })
       .then((response) => response.json())
@@ -50,8 +53,9 @@ const Register = ({onRouteChange, loadeUser}: RegisterProps) => {
               className="pa2 input-reset ba bg-transparent hover-bg-dark-green hover-white w-100"
               type="text"
               name="name"
+              value={values.name}
               id="name"
-              onChange={onNameChange}
+              onChange={handleChange}
             />
           </div>
           <div className="mt3">
@@ -61,9 +65,10 @@ const Register = ({onRouteChange, loadeUser}: RegisterProps) => {
             <input
               className="pa2 input-reset ba bg-transparent hover-bg-dark-green hover-white w-100"
               type="email"
-              name="email-address"
-              id="email-address"
-              onChange={onEmailChange}
+              name="email"
+              value={values.email}
+              id="email"
+              onChange={handleChange}
             />
           </div>
           <div className="mv3">
@@ -74,8 +79,9 @@ const Register = ({onRouteChange, loadeUser}: RegisterProps) => {
               className="b pa2 input-reset ba bg-transparent hover-bg-dark-green hover-white w-100"
               type="password"
               name="password"
+              value={values.password}
               id="password"
-              onChange={onPasswordChange}
+              onChange={handleChange}
             />
           </div>
         </fieldset>
