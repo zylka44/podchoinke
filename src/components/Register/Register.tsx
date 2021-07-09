@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { useForm } from "../../hooks";
 import { RegisterProps } from "../../models";
 
 interface RegisterFormValues {
@@ -8,18 +9,11 @@ interface RegisterFormValues {
 };
 
 const Register = ({onRouteChange, loadeUser}: RegisterProps) => {
-  const [values, setValues] = useState<RegisterFormValues>({
-    name: '',
-    email: '',
-    password: '',
+  const [values, handleChange] = useForm<RegisterFormValues>({
+      name: '',
+      email: '',
+      password: '',
   });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValues(prevValues => ({
-        ...prevValues,
-        [e.target.name]: e.target.value
-    }))
-  }
 
   const onRegister = () => {
     fetch('https://radiant-plateau-91423.herokuapp.com/register', {

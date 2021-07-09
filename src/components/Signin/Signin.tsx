@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { useForm } from "../../hooks";
 import { SigninProps } from "../../models";
 
 interface SigninFormValues {
@@ -7,17 +8,10 @@ interface SigninFormValues {
 };
 
 const Signin = ({onRouteChange, loadeUser}: SigninProps) => {
-  const [values, setValues] = useState<SigninFormValues>({
-    email: '',
-    password: '',
+  const [values, handleChange] = useForm<SigninFormValues>({
+      email: '',
+      password: '',
   });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValues(prevValues => ({
-        ...prevValues,
-        [e.target.name]: e.target.value
-    }))
-  };
 
   const onSubmitSignIn = () => {
     fetch('https://radiant-plateau-91423.herokuapp.com/signin', {
