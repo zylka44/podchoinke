@@ -1,11 +1,5 @@
 import { useState } from "react";
-
-import { User } from "../../models/user.model";
-
-interface RegisterProps {
-  onRouteChange: (route: string) => void;
-  loadeUser: (user: User) => void
-}
+import { RegisterProps } from "../../models";
 
 const Register = ({onRouteChange, loadeUser}: RegisterProps) => {
   const [ name, setName ] = useState<string>('');

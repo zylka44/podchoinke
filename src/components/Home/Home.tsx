@@ -1,9 +1,4 @@
-import { User } from "../../models/user.model";
-
-interface HomeProps {
-  onRouteChange: (route: string) => void;
-  user: User
-}
+import { HomeProps } from "../../models";
 
 const Home = ({onRouteChange, user}: HomeProps) => {
     return (

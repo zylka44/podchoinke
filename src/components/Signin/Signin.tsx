@@ -1,11 +1,5 @@
 import { useState } from "react";
-
-import { User } from "../../models/user.model";
-
-interface SigninProps {
-  onRouteChange: (route: string) => void;
-  loadeUser: (user: User) => void
-}
+import { SigninProps } from "../../models";
 
 const Signin = ({onRouteChange, loadeUser}: SigninProps) => {
   const [signInEmail, setSignInEmail] = useState<string>('');
