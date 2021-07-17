@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Link, Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
 import './App.scss';
 import { User } from './core/models';
+import store from './core/store';
 import Dashboard from './dashboard/containers/Dashboard';
 import Home from './home/containers/Home';
 
@@ -36,20 +38,22 @@ const App = () => {
   // );
 
   return (
-    <div className="app">
-      <Router>
-        <Switch>
-          <Route exact path="/" render={() => <Redirect to="/home" />} />
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-          <Route exact path="/*" render={() => <Redirect to="/home" />} />
-        </Switch>
-      </Router>
-    </div>
+    <Provider store={store}>
+      <div className="app">
+        <Router>
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to="/home" />} />
+            <Route path="/home">
+              <Home />
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard />
+            </Route>
+            <Route exact path="/*" render={() => <Redirect to="/home" />} />
+          </Switch>
+        </Router>
+      </div>
+    </Provider>
   );
 };
 
