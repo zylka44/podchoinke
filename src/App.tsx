@@ -39,20 +39,18 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <div className="app">
-        <Router>
-          <Switch>
-            <Route exact path="/" render={() => <Redirect to="/home" />} />
-            <Route path="/home">
-              <Home />
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route exact path="/*" render={() => <Redirect to="/home" />} />
-          </Switch>
-        </Router>
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/home" />} />
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route exact path="/*" render={() => <Redirect to="/home" />} />
+        </Switch>
+      </Router>
     </Provider>
   );
 };
