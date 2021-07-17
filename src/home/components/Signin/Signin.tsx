@@ -1,15 +1,15 @@
-import { useForm } from "../../hooks";
-import { SigninProps } from "../../models";
+import { useForm } from '../../../core/hooks';
+import { SigninProps } from '../../../core/models';
 
 interface SigninFormValues {
   email: string;
   password: string;
-};
+}
 
-const Signin = ({onRouteChange, loadeUser}: SigninProps) => {
+const Signin = ({ onRouteChange, loadeUser }: SigninProps) => {
   const [values, handleChange] = useForm<SigninFormValues>({
-      email: '',
-      password: '',
+    email: '',
+    password: '',
   });
 
   const onSubmitSignIn = () => {
@@ -77,6 +77,6 @@ const Signin = ({onRouteChange, loadeUser}: SigninProps) => {
       </div>
     </main>
   );
-}
+};
 
 export default Signin;

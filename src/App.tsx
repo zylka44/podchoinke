@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState } from 'react';
+import { BrowserRouter as Router, Link, Switch, Route, Redirect, useHistory } from 'react-router-dom';
+
 import './App.scss';
-import Home from "./components/Home/Home";
-import Signin from "./components/Signin/Signin";
-import Register from "./components/Register/Register";
-import { User } from "./models/user.model";
+import { User } from './core/models';
+import Dashboard from './dashboard/containers/Dashboard';
+import Home from './home/containers/Home';
 
 const App = () => {
   const [route, setRoute] = useState<string>('signin');
@@ -12,8 +13,7 @@ const App = () => {
     name: '',
     email: '',
     joined: '',
-  },
-  );
+  });
 
   const onRouteChange = (route: string): void => {
     setRoute(route);
@@ -23,19 +23,34 @@ const App = () => {
     setUser(user);
   };
 
+  // return (
+  //   <div className="app">
+  //     {route === 'home' ? (
+  //       <Home onRouteChange={onRouteChange} user={user} />
+  //     ) : route === 'signin' ? (
+  //       <Signin onRouteChange={onRouteChange} loadeUser={loadeUser} />
+  //     ) : (
+  //       <Register onRouteChange={onRouteChange} loadeUser={loadeUser} />
+  //     )}
+  //   </div>
+  // );
+
   return (
     <div className="app">
-      <div className="cos">coś</div>
-      {route === 'home' ? (
-        <Home onRouteChange={onRouteChange} user={user} />
-      ) : route === 'signin' ? (
-        <Signin onRouteChange={onRouteChange} loadeUser={loadeUser} />
-      ) : (
-        <Register onRouteChange={onRouteChange} loadeUser={loadeUser} />
-      )}
-      <div className="cosinnego">coś innego</div>
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/home" />} />
+          <Route path="/home">
+            <Home />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route exact path="/*" render={() => <Redirect to="/home" />} />
+        </Switch>
+      </Router>
     </div>
   );
-}
+};
 
 export default App;

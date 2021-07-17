@@ -1,17 +1,17 @@
-import { useForm } from "../../hooks";
-import { RegisterProps } from "../../models";
+import { useForm } from '../../../core/hooks';
+import { RegisterProps } from '../../../core/models';
 
 interface RegisterFormValues {
   name: string;
   email: string;
   password: string;
-};
+}
 
-const Register = ({onRouteChange, loadeUser}: RegisterProps) => {
+const Register = ({ onRouteChange, loadeUser }: RegisterProps) => {
   const [values, handleChange] = useForm<RegisterFormValues>({
-      name: '',
-      email: '',
-      password: '',
+    name: '',
+    email: '',
+    password: '',
   });
 
   const onRegister = () => {
@@ -89,6 +89,6 @@ const Register = ({onRouteChange, loadeUser}: RegisterProps) => {
       </div>
     </main>
   );
-}
+};
 
 export default Register;
