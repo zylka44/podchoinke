@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './App.scss';
 import Home from "./components/Home/Home";
 import Signin from "./components/Signin/Signin";
 import Register from "./components/Register/Register";
@@ -23,7 +24,8 @@ const App = () => {
   };
 
   return (
-    <div className="App">
+    <div className="app">
+      <div className="cos">coś</div>
       {route === 'home' ? (
         <Home onRouteChange={onRouteChange} user={user} />
       ) : route === 'signin' ? (
@@ -31,6 +33,7 @@ const App = () => {
       ) : (
         <Register onRouteChange={onRouteChange} loadeUser={loadeUser} />
       )}
+      <div className="cosinnego">coś innego</div>
     </div>
   );
 }

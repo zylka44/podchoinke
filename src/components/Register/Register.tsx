@@ -1,4 +1,3 @@
-import { ChangeEvent, useState } from "react";
 import { useForm } from "../../hooks";
 import { RegisterProps } from "../../models";
 
